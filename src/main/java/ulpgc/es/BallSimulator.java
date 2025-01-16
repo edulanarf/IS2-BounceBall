@@ -7,32 +7,43 @@ public class BallSimulator {
         this.dt = dt;
     }
     public Ball simulate(Ball ball){
-        return willBounds(ball) ?
-                new Ball(ball.r(), newHighAfterBounceOf(ball) , newVelocityOf(ball), ball.g(), ball.cr()) : //Si rebota
-                new Ball(ball.r(), newHighOf(ball), newVelocityOf(ball), ball.g(), ball.cr());              //Si no rebota
+        return willBounce(ball) ?
+                new Ball(ball.r(), newHeightAfterBounce(ball), newVelocityAfterBounce(ball), ball.g(), ball.cr()) : //Si rebota
+                new Ball(ball.r(), newHeightOf(ball), newVelocityOf(ball), ball.g(), ball.cr());              //Si no rebota
     }
 
-    private double newHighAfterBounceOf(Ball ball) {
-        return newVelocityBounce(ball) * (dt-timeOfBounced(ball));
+    private double newHeightAfterBounce(Ball ball) {
+        // Calculamos la altura después del rebote, usando la nueva velocidad
+        double velocityAfterBounce = newVelocityAfterBounce(ball);
+        return velocityAfterBounce * timeToBounce(ball) + ball.h();
     }
 
-    private double newVelocityBounce(Ball ball) {
-        return -ball.cr()*(ball.v()+ ball.g()*timeOfBounced(ball));
+    private double newVelocityAfterBounce(Ball ball) {
+        // La nueva velocidad después del rebote
+        return -ball.cr() * ball.v();
     }
 
-    private double timeOfBounced(Ball ball) {
-        return -ball.v() / ball.g(); // ms/ms^2 = s
+    private double timeToBounce(Ball ball) {
+        // Calculamos el tiempo para llegar al suelo desde la altura actual
+        System.out.println( -ball.h() / ball.v());
+        return -ball.h() / ball.v(); // Tiempo de caída hasta el suelo
     }
 
     private double newVelocityOf(Ball ball) {
-        return ball.v()+ball.g()*dt;
+        // Calculamos la nueva velocidad después de un intervalo de tiempo (dt) considerando la gravedad
+        return ball.v() + ball.g() * dt;
     }
 
+    private double newHeightOf(Ball ball) {
+        // Calculamos la nueva altura utilizando la fórmula estándar de cinemática
+        double newHeightBall = ball.h() + ball.v() * dt + 0.5 * ball.g() * dt * dt;
+        if(newHeightBall<0)newHeightBall=0;
+        return newHeightBall;
 
-    private double newHighOf(Ball ball) {
-        return ball.h()+ball.v()+dt;
     }
-    private boolean willBounds(Ball ball) {
-        return dt > -ball.h()/ball.v() && ball.v() < 0;
+
+    private boolean willBounce(Ball ball) {
+        // Verificamos si la pelota ha tocado el suelo
+        return ball.h() <= 0 && ball.v() <= 0;
+        }
     }
-}
