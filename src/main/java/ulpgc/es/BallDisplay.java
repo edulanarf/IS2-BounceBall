@@ -1,5 +1,6 @@
 package ulpgc.es;
 
 public interface BallDisplay {
-    void drawCircle(int y, int r);
+    void drawCircle(int r, int y);
+    void clear();
 }

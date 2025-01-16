@@ -5,12 +5,12 @@ import java.util.TimerTask;
 
 public class BallPresenter {
     private Ball ball;
-    //private final BallDisplay ballDisplay;
+    private final BallDisplay ballDisplay;
     private final BallSimulator ballSimulator;
 
-    public BallPresenter(Ball ball, BallSimulator ballSimulator) {
+    public BallPresenter(Ball ball, BallSimulator ballSimulator,BallDisplay ballDisplay) {
         this.ball = new Ball(ball.r(),ball.h(),ball.v(),ball.g(),ball.cr());
-        //this.ballDisplay = ballDisplay;
+        this.ballDisplay = ballDisplay;
         this.ballSimulator = ballSimulator;
     }
 
@@ -28,8 +28,11 @@ public class BallPresenter {
     }
 
 
+
     public void simulate(){
+        this.ballDisplay.clear();
         ball = ballSimulator.simulate(this.ball);
+        this.ballDisplay.drawCircle((int) ball.r(),(int) ball.h());
         System.out.println(ball);
     }
 }

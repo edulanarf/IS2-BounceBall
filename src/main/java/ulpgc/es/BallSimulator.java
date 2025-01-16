@@ -25,7 +25,6 @@ public class BallSimulator {
 
     private double timeToBounce(Ball ball) {
         // Calculamos el tiempo para llegar al suelo desde la altura actual
-        System.out.println( -ball.h() / ball.v());
         return -ball.h() / ball.v(); // Tiempo de caída hasta el suelo
     }
 
