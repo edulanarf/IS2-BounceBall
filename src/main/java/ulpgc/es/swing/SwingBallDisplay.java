@@ -1,4 +1,4 @@
-package ulpgc.es;
+package ulpgc.es.swing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +8,9 @@ import java.util.List;
 public class SwingBallDisplay extends JPanel implements BallDisplay {
     private List<Paint> paints = new ArrayList<>();
     @Override
-    public void drawCircle(int r, int y) {
+    public void drawCircle(int r, int y, int x) {
         synchronized (paints) {
-            paints.add(new Paint(y, r)); // Agregar de manera segura
+            paints.add(new Paint(y, r, x)); // Agregar de manera segura
         }
         repaint(); // Forzar la actualización del panel
     }
@@ -29,9 +29,8 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         synchronized (paints) {
-            g.setColor(Color.BLACK);
             for (Paint paint : paints) {
-                int centerX = (this.getWidth() / 2) - paint.r(); // Centrar en X
+                int centerX = paint.x() - paint.r(); // Centrar en X
                 int centerY = this.getHeight()/2 - paint.y() - paint.r();
                 int diameter = paint.r() * 2;
                 g.setColor(Color.RED);
@@ -43,6 +42,6 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
         }
     }
 
-    private record Paint(int y, int r) {
+    private record Paint(int y, int r, int x) {
     }
 }

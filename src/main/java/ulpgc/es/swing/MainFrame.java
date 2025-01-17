@@ -1,4 +1,4 @@
-package ulpgc.es;
+package ulpgc.es.swing;
 
 import javax.swing.*;
 import java.awt.*;

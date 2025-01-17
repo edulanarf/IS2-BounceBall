@@ -1,4 +1,4 @@
-package ulpgc.es;
+package ulpgc.es.model;
 
 public class BallSimulator {
     private final double dt;
@@ -8,8 +8,8 @@ public class BallSimulator {
     }
     public Ball simulate(Ball ball){
         return willBounce(ball) ?
-                new Ball(ball.r(), newHeightAfterBounce(ball), newVelocityAfterBounce(ball), ball.g(), ball.cr()) : //Si rebota
-                new Ball(ball.r(), newHeightOf(ball), newVelocityOf(ball), ball.g(), ball.cr());              //Si no rebota
+                new Ball(ball.r(), newHeightAfterBounce(ball), newVelocityAfterBounce(ball), ball.g(), ball.cr(), ball.x()) :
+                new Ball(ball.r(), newHeightOf(ball), newVelocityOf(ball), ball.g(), ball.cr(), ball.x());
     }
 
     private double newHeightAfterBounce(Ball ball) {

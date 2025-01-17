@@ -1,4 +1,6 @@
-package ulpgc.es;
+package ulpgc.es.model;
+
+import ulpgc.es.swing.BallDisplay;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,7 +11,7 @@ public class BallPresenter {
     private final BallSimulator ballSimulator;
 
     public BallPresenter(Ball ball, BallSimulator ballSimulator,BallDisplay ballDisplay) {
-        this.ball = new Ball(ball.r(),ball.h(),ball.v(),ball.g(),ball.cr());
+        this.ball = new Ball(ball.r(),ball.h(),ball.v(),ball.g(),ball.cr(), ball.x());
         this.ballDisplay = ballDisplay;
         this.ballSimulator = ballSimulator;
     }
@@ -32,6 +34,6 @@ public class BallPresenter {
     public void simulate(){
         this.ballDisplay.clear();
         ball = ballSimulator.simulate(this.ball);
-        this.ballDisplay.drawCircle((int) ball.r(),(int) ball.h());
+        this.ballDisplay.drawCircle((int) ball.r(),(int) ball.h(), (int) ball.x());
     }
 }
