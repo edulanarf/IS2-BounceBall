@@ -33,6 +33,5 @@ public class BallPresenter {
         this.ballDisplay.clear();
         ball = ballSimulator.simulate(this.ball);
         this.ballDisplay.drawCircle((int) ball.r(),(int) ball.h());
-        System.out.println(ball);
     }
 }

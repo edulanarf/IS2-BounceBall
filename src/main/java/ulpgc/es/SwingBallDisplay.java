@@ -7,7 +7,6 @@ import java.util.List;
 
 public class SwingBallDisplay extends JPanel implements BallDisplay {
     private List<Paint> paints = new ArrayList<>();
-
     @Override
     public void drawCircle(int r, int y) {
         paints.add(new Paint(y,r));
@@ -20,13 +19,15 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
         repaint();
     }
 
+    @Override
     public void paint(Graphics g){
         for(Paint paint: paints){
-            g.setColor(Color.WHITE);
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            int centerX = (this.getWidth() / 2) - paint.r(); // Centrar en X
+            int centerY = paint.y(); // Coordenada Y del círculo
+            int diameter = paint.r() * 2; // Diámetro del círculo
 
             // Dibujar el contorno del círculo
-            g.drawOval(200, paint.y, paint.r * 2, paint.y);
+            g.drawOval(centerX, centerY, diameter, diameter);
         }
     }
 
