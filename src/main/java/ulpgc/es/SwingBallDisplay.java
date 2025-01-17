@@ -32,7 +32,7 @@ public class SwingBallDisplay extends JPanel implements BallDisplay {
             g.setColor(Color.BLACK);
             for (Paint paint : paints) {
                 int centerX = (this.getWidth() / 2) - paint.r(); // Centrar en X
-                int centerY = paint.y()+200; // 200 para que rebote mas o menos en el centro de la ventana (800+600)
+                int centerY = this.getHeight() - paint.y() - paint.r()*3 -200; // 200 para que rebote mas o menos en el centro de la ventana (800+600)
                 int diameter = paint.r() * 2; // Diámetro del círculo
 
                 // Dibujar el contorno del círculo
