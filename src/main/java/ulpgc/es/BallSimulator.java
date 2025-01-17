@@ -15,7 +15,7 @@ public class BallSimulator {
     private double newHeightAfterBounce(Ball ball) {
         // Calculamos la altura después del rebote, usando la nueva velocidad
         double velocityAfterBounce = newVelocityAfterBounce(ball);
-        return velocityAfterBounce * timeToBounce(ball) + ball.h();
+        return -velocityAfterBounce * timeToBounce(ball) + ball.h();
     }
 
     private double newVelocityAfterBounce(Ball ball) {
@@ -36,7 +36,6 @@ public class BallSimulator {
     private double newHeightOf(Ball ball) {
         // Calculamos la nueva altura utilizando la fórmula estándar de cinemática
         double newHeightBall = ball.h() + ball.v() * dt + 0.5 * ball.g() * dt * dt;
-        if(newHeightBall<0)newHeightBall=0;
         return newHeightBall;
 
     }

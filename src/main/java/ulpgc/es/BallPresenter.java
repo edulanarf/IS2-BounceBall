@@ -15,7 +15,7 @@ public class BallPresenter {
     }
 
     public void execute(){
-        new Timer().schedule(simulateTask(), 1, 1);
+        new Timer().schedule(simulateTask(), 10, 10);
     }
 
     private TimerTask simulateTask() {
@@ -32,6 +32,7 @@ public class BallPresenter {
     public void simulate(){
         this.ballDisplay.clear();
         ball = ballSimulator.simulate(this.ball);
+        System.out.println(ball);
         this.ballDisplay.drawCircle((int) ball.r(),(int) ball.h());
     }
 }
